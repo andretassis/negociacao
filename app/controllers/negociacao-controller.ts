@@ -1,9 +1,11 @@
+import { Negociacao } from "../models/negociacao.js";
+
 export class NegociacaoController {
 
     // cria os inputs de data, quantidade e valor de forma privada
-    private inputData;
-    private inputQuantidade;
-    private inputValor;
+    private inputData: HTMLInputElement;
+    private inputQuantidade: HTMLInputElement;
+    private inputValor: HTMLInputElement;
 
     constructor() {
         // os inputs de data, quantidade e valor serão o que o usuário digitou nos campos correspondentes
@@ -12,9 +14,28 @@ export class NegociacaoController {
         this.inputValor = document.querySelector('#valor');
     }
 
-    adiciona() {
-        console.log(this.inputData);
-        console.log(this.inputQuantidade);
-        console.log(this.inputValor);
+    // adiciona uma nova negociação
+    adiciona(): void {
+        const negociacao = this.criarNegociacao()
+        console.log(negociacao)
+        this.limparFormulario()
+    }
+
+    // cria uma nova negociação convertendo os dados digitados nos inputs para os tipos corretos
+    criarNegociacao(): Negociacao {
+        const exp = /-/g;
+        const data = new Date(this.inputData.value.replace(exp, ','));
+        const quantidade = parseInt(this.inputQuantidade.value);
+        const valor = parseFloat(this.inputValor.value);
+
+        return new Negociacao(data, quantidade, valor)
+    }
+
+    // limpa o formulário e retorna o foco para o input de data
+    limparFormulario(): void {
+        this.inputData.value = '';
+        this.inputQuantidade.value = '';
+        this.inputValor.value = '';
+        this.inputData.focus();
     }
 }

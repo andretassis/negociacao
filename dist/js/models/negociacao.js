@@ -6,15 +6,19 @@ export class Negociacao {
         this._quantidade = quantidade;
         this._valor = valor;
     }
+    // retorna a data
     get data() {
         return this._data;
     }
+    // retorna a quantidade
     get quantidade() {
         return this._quantidade;
     }
+    // retorna o valor
     get valor() {
         return this._valor;
     }
+    // retorna o volume de negociação
     get volume() {
         return this._quantidade * this._valor;
     }
