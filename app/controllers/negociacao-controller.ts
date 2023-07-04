@@ -1,4 +1,5 @@
 import { Negociacao } from "../models/negociacao.js";
+import { Negociacoes } from "../models/negociacoes.js";
 
 export class NegociacaoController {
 
@@ -6,6 +7,7 @@ export class NegociacaoController {
     private inputData: HTMLInputElement;
     private inputQuantidade: HTMLInputElement;
     private inputValor: HTMLInputElement;
+    private negociacoes = new Negociacoes()
 
     constructor() {
         // os inputs de data, quantidade e valor serão o que o usuário digitou nos campos correspondentes
@@ -17,8 +19,9 @@ export class NegociacaoController {
     // adiciona uma nova negociação
     adiciona(): void {
         const negociacao = this.criarNegociacao()
-        console.log(negociacao)
-        this.limparFormulario()
+        this.negociacoes.adiciona(negociacao);
+        console.log(this.negociacoes.lista());
+        this.limparFormulario();
     }
 
     // cria uma nova negociação convertendo os dados digitados nos inputs para os tipos corretos
