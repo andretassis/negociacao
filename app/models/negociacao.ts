@@ -15,7 +15,8 @@ export class Negociacao {
 
     // retorna a data
     get data(): Date {
-        return this._data;
+        const data = new Date(this.data.getTime()) // impede que o método setDate seja utilizado para atribuir um valor à data
+        return data
     }
 
     // retorna a quantidade
