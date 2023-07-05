@@ -1,18 +1,21 @@
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
+import { NegociacoesView } from "../views/negociacoes-view.js";
 export class NegociacaoController {
     constructor() {
         this.negociacoes = new Negociacoes();
+        this.negociacoesView = new NegociacoesView("#negociacoes-view");
         // os inputs de data, quantidade e valor serão o que o usuário digitou nos campos correspondentes
         this.inputData = document.querySelector('#data');
         this.inputQuantidade = document.querySelector('#quantidade');
         this.inputValor = document.querySelector('#valor');
+        this.negociacoesView.update(this.negociacoes);
     }
     // adiciona uma nova negociação
     adiciona() {
         const negociacao = this.criarNegociacao();
         this.negociacoes.adiciona(negociacao);
-        console.log(this.negociacoes.lista());
+        this.negociacoesView.update(this.negociacoes);
         this.limparFormulario();
     }
     // cria uma nova negociação convertendo os dados digitados nos inputs para os tipos corretos
