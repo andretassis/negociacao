@@ -1,5 +1,6 @@
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
+import { NegociacaoMensagem } from "../views/mensagem-view.js";
 import { NegociacoesView } from "../views/negociacoes-view.js";
 
 export class NegociacaoController {
@@ -8,8 +9,9 @@ export class NegociacaoController {
     private inputData: HTMLInputElement;
     private inputQuantidade: HTMLInputElement;
     private inputValor: HTMLInputElement;
-    private negociacoes = new Negociacoes()
-    private negociacoesView = new NegociacoesView("#negociacoes-view")
+    private negociacoes = new Negociacoes();
+    private negociacoesView = new NegociacoesView("#negociacoes-view");
+    private negociacaoMensagem = new NegociacaoMensagem("#mensagem-view");
 
     constructor() {
         // os inputs de data, quantidade e valor serão o que o usuário digitou nos campos correspondentes
@@ -23,6 +25,7 @@ export class NegociacaoController {
     adiciona(): void {
         const negociacao = this.criarNegociacao()
         this.negociacoes.adiciona(negociacao);
+        this.negociacaoMensagem.update('Negociação adicionada com sucesso!')
         this.negociacoesView.update(this.negociacoes);
         this.limparFormulario();
     }
