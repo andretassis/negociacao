@@ -2,8 +2,9 @@ import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
 import { NegociacaoMensagem } from "../views/mensagem-view.js";
 import { NegociacoesView } from "../views/negociacoes-view.js";
+import { View } from "../views/views.js";
 
-export class NegociacaoController {
+export class NegociacaoController extends View {
 
     // cria os inputs de data, quantidade e valor de forma privada
     private inputData: HTMLInputElement;
@@ -12,14 +13,6 @@ export class NegociacaoController {
     private negociacoes = new Negociacoes();
     private negociacoesView = new NegociacoesView("#negociacoes-view");
     private negociacaoMensagem = new NegociacaoMensagem("#mensagem-view");
-
-    constructor() {
-        // os inputs de data, quantidade e valor serão o que o usuário digitou nos campos correspondentes
-        this.inputData = document.querySelector('#data');
-        this.inputQuantidade = document.querySelector('#quantidade');
-        this.inputValor = document.querySelector('#valor');
-        this.negociacoesView.update(this.negociacoes);
-    }
 
     // adiciona uma nova negociação
     adiciona(): void {
