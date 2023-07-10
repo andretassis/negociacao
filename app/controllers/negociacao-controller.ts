@@ -2,9 +2,9 @@ import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
 import { NegociacaoMensagem } from "../views/mensagem-view.js";
 import { NegociacoesView } from "../views/negociacoes-view.js";
-import { View } from "../views/views.js";
 
-export class NegociacaoController extends View {
+
+export class NegociacaoController {
 
     // cria os inputs de data, quantidade e valor de forma privada
     private inputData: HTMLInputElement;
