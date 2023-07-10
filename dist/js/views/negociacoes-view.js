@@ -1,8 +1,5 @@
-export class NegociacoesView {
-    // obtem o elemento do DOM onde será renderizada a tabela
-    constructor(seletor) {
-        this.elemento = document.querySelector(seletor);
-    }
+import { View } from "./views.js";
+export class NegociacoesView extends View {
     // define a estrutura da view
     template(model) {
         return `
@@ -27,9 +24,5 @@ export class NegociacoesView {
                 </tbody>
             </table>
         `;
-    }
-    //atualiza a estrutura da view
-    update(model) {
-        this.elemento.innerHTML = this.template(model);
     }
 }

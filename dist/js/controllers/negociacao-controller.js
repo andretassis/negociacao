@@ -7,11 +7,6 @@ export class NegociacaoController {
         this.negociacoes = new Negociacoes();
         this.negociacoesView = new NegociacoesView("#negociacoes-view");
         this.negociacaoMensagem = new NegociacaoMensagem("#mensagem-view");
-        // os inputs de data, quantidade e valor serão o que o usuário digitou nos campos correspondentes
-        this.inputData = document.querySelector('#data');
-        this.inputQuantidade = document.querySelector('#quantidade');
-        this.inputValor = document.querySelector('#valor');
-        this.negociacoesView.update(this.negociacoes);
     }
     // adiciona uma nova negociação
     adiciona() {
