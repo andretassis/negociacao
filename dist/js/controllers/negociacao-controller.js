@@ -7,13 +7,16 @@ export class NegociacaoController {
         this.negociacoes = new Negociacoes();
         this.negociacoesView = new NegociacoesView("#negociacoes-view");
         this.negociacaoMensagem = new NegociacaoMensagem("#mensagem-view");
+        this.inputData = document.querySelector('#data');
+        this.inputQuantidade = document.querySelector('#quantidade');
+        this.inputValor = document.querySelector('#valor');
+        this.negociacoesView.update(this.negociacoes);
     }
     // adiciona uma nova negociação
     adiciona() {
         const negociacao = this.criarNegociacao();
         this.negociacoes.adiciona(negociacao);
-        this.negociacaoMensagem.update('Negociação adicionada com sucesso!');
-        this.negociacoesView.update(this.negociacoes);
+        this.atualizaView();
         this.limparFormulario();
     }
     // cria uma nova negociação convertendo os dados digitados nos inputs para os tipos corretos
@@ -30,5 +33,9 @@ export class NegociacaoController {
         this.inputQuantidade.value = '';
         this.inputValor.value = '';
         this.inputData.focus();
+    }
+    atualizaView() {
+        this.negociacaoMensagem.update('Negociação adicionada com sucesso!');
+        this.negociacoesView.update(this.negociacoes);
     }
 }

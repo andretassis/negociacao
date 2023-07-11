@@ -14,12 +14,17 @@ export class NegociacaoController {
     private negociacoesView = new NegociacoesView("#negociacoes-view");
     private negociacaoMensagem = new NegociacaoMensagem("#mensagem-view");
 
+    constructor() {
+        this.inputData = document.querySelector('#data');
+        this.inputQuantidade = document.querySelector('#quantidade');
+        this.inputValor = document.querySelector('#valor');
+        this.negociacoesView.update(this.negociacoes);
+    }
     // adiciona uma nova negociação
-    adiciona(): void {
+    public adiciona(): void {
         const negociacao = this.criarNegociacao()
         this.negociacoes.adiciona(negociacao);
-        this.negociacaoMensagem.update('Negociação adicionada com sucesso!')
-        this.negociacoesView.update(this.negociacoes);
+        this.atualizaView();
         this.limparFormulario();
     }
 
@@ -34,10 +39,15 @@ export class NegociacaoController {
     }
 
     // limpa o formulário e retorna o foco para o input de data
-    limparFormulario(): void {
+    private limparFormulario(): void {
         this.inputData.value = '';
         this.inputQuantidade.value = '';
         this.inputValor.value = '';
         this.inputData.focus();
+    }
+
+    private atualizaView(): void {
+        this.negociacaoMensagem.update('Negociação adicionada com sucesso!')
+        this.negociacoesView.update(this.negociacoes);
     }
 }
