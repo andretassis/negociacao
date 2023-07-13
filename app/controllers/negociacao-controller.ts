@@ -1,3 +1,4 @@
+import { tempoDeExecucao } from "../decorators/tempo-de-execucao.js";
 import { DiasDaSemana } from "../enums/dias-da-semana.js";
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
@@ -22,6 +23,7 @@ export class NegociacaoController {
         this.negociacoesView.update(this.negociacoes);
     }
     // adiciona uma nova negociação
+    @tempoDeExecucao()
     public adiciona(): void {
         const negociacao = this.criarNegociacao()
         if (negociacao.data.getDay() > DiasDaSemana.DOMINGO && negociacao.data.getDay() < DiasDaSemana.SABADO) {
