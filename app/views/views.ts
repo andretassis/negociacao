@@ -1,3 +1,5 @@
+import { tempoDeExecucao } from "../decorators/tempo-de-execucao.js";
+
 // cria uma parte de código que pode ser reaproveitado por elementos filhos para evitar repetições
 export abstract class View<T> {
     protected elemento: HTMLElement;
@@ -11,6 +13,7 @@ export abstract class View<T> {
         }
     }
 
+    @tempoDeExecucao()
     public update(model: T): void {
         this.elemento.innerHTML = this.template(model);
     }
