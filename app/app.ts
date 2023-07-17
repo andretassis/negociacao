@@ -10,3 +10,12 @@ if (form) {
 } else {
     throw Error('Verifique se o form existe.')
 }
+
+const importar = document.querySelector('#btn-importar')
+if (importar) {
+    importar.addEventListener('click', () => {
+        controller.importar();
+    })
+} else {
+    throw Error('Botão não encontrado!')
+}

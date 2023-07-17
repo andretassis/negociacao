@@ -1,5 +1,7 @@
+import { inspecionar } from "../decorators/inspecionar.js";
 import { tempoDeExecucao } from "../decorators/tempo-de-execucao.js";
 import { DiasDaSemana } from "../enums/dias-da-semana.js";
+import { NegociacoesAPI } from "../interfaces/negociacoesAPI.js";
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
 import { NegociacaoMensagem } from "../views/mensagem-view.js";
@@ -22,7 +24,9 @@ export class NegociacaoController {
         this.inputValor = document.querySelector('#valor') as HTMLInputElement;
         this.negociacoesView.update(this.negociacoes);
     }
+
     // adiciona uma nova negociação
+    @inspecionar()
     @tempoDeExecucao()
     public adiciona(): void {
         const negociacao = this.criarNegociacao()
@@ -35,6 +39,25 @@ export class NegociacaoController {
         }
     }
 
+    public importar(): void {
+        fetch("http://localhost:8080/dados")
+            .then(res => res.json())
+            .then((dadosAPI: Array<NegociacoesAPI>) => {
+                return dadosAPI.map((dado) => {
+                    return new Negociacao(
+                        new Date(),
+                        dado.vezes,
+                        dado.montante
+                    )
+                })
+            })
+            .then(negociacoesAPI => {
+                for (let negociacao of negociacoesAPI) {
+                    this.negociacoes.adiciona(negociacao);
+                }
+                this.negociacoesView.update(this.negociacoes)
+            })
+    }
     // cria uma nova negociação convertendo os dados digitados nos inputs para os tipos corretos
     criarNegociacao(): Negociacao {
         const exp = /-/g;
@@ -57,4 +80,5 @@ export class NegociacaoController {
         this.negociacaoMensagem.update('Negociação adicionada com sucesso!')
         this.negociacoesView.update(this.negociacoes);
     }
+
 }
