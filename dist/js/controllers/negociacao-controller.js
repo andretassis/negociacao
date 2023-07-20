@@ -43,6 +43,13 @@ export class NegociacaoController {
             });
         })
             .then(negociacoesAPI => {
+            return negociacoesAPI.filter(negociacoesAPI => {
+                return !this.negociacoes
+                    .lista()
+                    .some(negociacao => negociacao.igual(negociacoesAPI));
+            });
+        })
+            .then(negociacoesAPI => {
             for (let negociacao of negociacoesAPI) {
                 this.negociacoes.adiciona(negociacao);
             }
