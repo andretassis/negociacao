@@ -33,4 +33,12 @@ export class Negociacao {
     get volume(): number {
         return this._quantidade * this._valor;
     }
+
+    public texto(): string {
+        return `
+            Data: ${this.data}
+            Quantidade: ${this.quantidade}
+            Valor: ${this.valor}
+        `
+    }
 }

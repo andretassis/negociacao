@@ -9,6 +9,7 @@ import { tempoDeExecucao } from "../decorators/tempo-de-execucao.js";
 import { DiasDaSemana } from "../enums/dias-da-semana.js";
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
+import { imprimir } from "../utilidades/imprimir.js";
 import { NegociacaoMensagem } from "../views/mensagem-view.js";
 import { NegociacoesView } from "../views/negociacoes-view.js";
 export class NegociacaoController {
@@ -25,6 +26,7 @@ export class NegociacaoController {
         const negociacao = this.criarNegociacao();
         if (negociacao.data.getDay() > DiasDaSemana.DOMINGO && negociacao.data.getDay() < DiasDaSemana.SABADO) {
             this.negociacoes.adiciona(negociacao);
+            imprimir(negociacao);
             this.atualizaView();
             this.limparFormulario();
         }
